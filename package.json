@@ -4,7 +4,8 @@
   "description": "a backend service that provide todo functionality with authentication",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
   },
   "author": "Obetta Auguatine .E",
   "license": "ISC",
