@@ -1,30 +1,22 @@
 const mongoose = require('mongoose');
 
-todoSchema = new mongoose.Schema({
-    title: {
-        type: 'String',
-        required: [true, 'please provide title name'],
+const todoSchema = new mongoose.Schema({
+    todo: {
+        type: String,
+        required: [true, 'Please provide content name'],
         maxLength: 50
     },
-    content: {
-        type: 'String',
-        required: [true, 'please provide content name'],
-        maxLength: 50
-    },
-    status: {
-        type: 'String',
-        enum:['inProgress', 'completed', 'notCompleted'],
-       default: 'notCompleted',
-  
+    completed: {
+        type: Boolean,
+        default: false
     },
     createdBy: {
-        type: mongoose.Types.ObjectId,//this allow us to tie anyjob created to our User model
-        ref: 'User',// model we are referncing which is our User model.
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User', 
         required: [true, 'Please provide user'],
     },
 },
     { timestamps: true }
-)
-
+);
 
 module.exports = mongoose.model('Todo', todoSchema);

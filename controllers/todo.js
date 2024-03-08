@@ -30,12 +30,12 @@ const createTodo = async (req, res) => {
 //update todo for a particular user
 const updateTodo = async (req, res) => { 
     const {
-        body:{title,content, status},
+        body:{todo,completed},
         user: { userId },
         params: { id: todoId } } = req;
     
-    if (title === '' || content === '') { 
-        throw new BadRequestError("title or content can not be empty");
+    if (todo === '') { 
+        throw new BadRequestError("todo can not be empty");
     }
     const patchTodo = await Todo.findByIdAndUpdate(
         {
@@ -52,11 +52,11 @@ const updateTodo = async (req, res) => {
 //delete TODO for a particular user
 const deleteTodo = async (req, res) => {
     const { user: { userId }, params: { id: todoId } } = req;
-    const deleteTodo = await Job.findByIdAndRemove({ _id: todoId,createdBy: userId });
+    const deleteTodo = await Todo.findByIdAndDelete({ _id: todoId,createdBy: userId });
     if (!deleteTodo) { 
         throw new NotFoundError(`No todo with id ${todoId}`);
     }
-    res.status(StatusCodes.OK).json({Msg: 'Job deleted successfully'});
+    res.status(StatusCodes.OK).json({Msg: 'Todo deleted successfully'});
 }
 
 module.exports = { getAlltodo, getTodo, createTodo, updateTodo, deleteTodo };
