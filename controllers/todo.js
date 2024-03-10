@@ -53,7 +53,7 @@ const updateTodo = async (req, res) => {
 const deleteTodo = async (req, res) => {
     const { user: { userId }, params: { id: todoId } } = req;
     const deleteTodo = await Todo.findByIdAndDelete({ _id: todoId,createdBy: userId });
-    if (!deleteTodo) { 
+    if (!deleteTodo) { 2
         throw new NotFoundError(`No todo with id ${todoId}`);
     }
     res.status(StatusCodes.OK).json({Msg: 'Todo deleted successfully'});
